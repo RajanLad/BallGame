@@ -1,0 +1,43 @@
+//Ignore
+
+                tv.getLocationInWindow(location);
+                //Toast.makeText(MainActivity.this, "Row : "+pos/3+"Column : "+pos%3+" "+view.getId()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Row : "+pos/3+"Column : "+pos%4+" posti_x"+location[0]+"post_y"+location[1]+"", Toast.LENGTH_SHORT).show();
+
+
+                    private boolean movement(View view, MotionEvent motionEvent,int location[])
+                    {
+                        final int x = (int) motionEvent.getRawX();
+                        final int y = (int) motionEvent.getRawY();
+
+
+
+                        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+
+                            case MotionEvent.ACTION_DOWN:
+                                RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams)
+                                        view.getLayoutParams();
+
+                                xDelta = x - lParams.leftMargin;
+                                yDelta = y - lParams.topMargin;
+                                break;
+
+                            case MotionEvent.ACTION_UP:
+                                Toast.makeText(MainActivity.this,
+                                        "thanks for new location!"+xDelta+"  "+yDelta, Toast.LENGTH_SHORT)
+                                        .show();
+                                break;
+
+                            case MotionEvent.ACTION_MOVE:
+                                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view
+                                        .getLayoutParams();
+                                layoutParams.leftMargin = x - location[0];
+                                layoutParams.topMargin = y - location[1];
+                                layoutParams.rightMargin =  x - location[0];
+                                layoutParams.bottomMargin = y - location[1];
+                                view.setLayoutParams(layoutParams);
+                                break;
+                        }
+                        mainLayout.invalidate();
+                        return true;
+                    }
